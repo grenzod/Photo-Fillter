@@ -22,21 +22,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RelativeLayout mainLayout = findViewById(R.id.mainLayout);
-        ImageView plusIcon = findViewById(R.id.plusIcon);
+        ImageView plusIcon = findViewById(R.id.PlusIcon);
 
         plusIcon.setOnClickListener(v -> showPhotoOptionsFragment());
     }
 
     private void showPhotoOptionsFragment() {
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
-//                ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CAMERA_PERMISSION);
-//        } else {
-//            PhotoOptionsFragment fragment = PhotoOptionsFragment.newInstance();
-//            fragment.show(getSupportFragmentManager(), "photo_options");
-//        }
         PhotoOptionsFragment fragment = PhotoOptionsFragment.newInstance();
-        fragment.show(getSupportFragmentManager(), "photo_options");
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
